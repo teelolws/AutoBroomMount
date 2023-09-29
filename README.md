@@ -15,18 +15,22 @@ Examples of Mount Macros you might use that will be compatible:
 
 - For a Shaman to use Ghost Wolf if a mount is unavailable:
 
-`#showtooltip
+```
+#showtooltip
 /cast [combat][nooutdoors] Ghost Wolf
-/run if not InCombatLockdown() then C_MountJournal.SummonByID(0) end`
+/run if not InCombatLockdown() then C_MountJournal.SummonByID(0) end
+```
 
 - Heres a Druid one I wrote that chooses Cat Form / Travel Form / Dragonriding depending on circumstances:
 
-`#showtooltip
+```
+#showtooltip
 /cancelaura Bear Form
 /cancelaura Cat Form
 /cast [flyable,nocombat] Travel Form
 /cast [combat] Travel Form
 /cast [nooutdoors] Cat Form
-/run if SecureCmdOptionParse "nocombat,noflyable,outdoors"then C_MountJournal.SummonByID(0) end`
+/run if SecureCmdOptionParse "nocombat,noflyable,outdoors"then C_MountJournal.SummonByID(0) end
+```
 
 As long as you macro that Summon Random Favorite Mount button then this will work.
