@@ -5,7 +5,7 @@ local function update()
     local dragonridingUsable = IsUsableSpell(spellName)
     
     spellName = GetSpellInfo(419345)
-    local broomUsable = true--IsUsableSpell(spellName)
+    local broomUsable = IsUsableSpell(spellName)
     local source, replacement = "C_MountJournal%.SummonByID%(0%)", "C_MountJournal.SummonByID(1799)"
     
     if dragonridingUsable or (not broomUsable) then
