@@ -33,4 +33,4 @@ Examples of Mount Macros you might use that will be compatible:
 /run if SecureCmdOptionParse "nocombat,noflyable,outdoors"then C_MountJournal.SummonByID(0) end
 ```
 
-As long as you macro that Summon Random Favorite Mount button then this will work.
+As long as you macro that Summon Random Favorite Mount button then this will work. (It will keep using the Summon Random Favorite Mount button if you are in a Dragonriding area.)
