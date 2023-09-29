@@ -15,7 +15,7 @@ Examples of Mount Macros you might use that will be compatible:
 
 - For a Shaman to use Ghost Wolf if a mount is unavailable:
 
-```
+```LUA
 #showtooltip
 /cast [combat][nooutdoors] Ghost Wolf
 /run if not InCombatLockdown() then C_MountJournal.SummonByID(0) end
@@ -23,7 +23,7 @@ Examples of Mount Macros you might use that will be compatible:
 
 - Heres a Druid one I wrote that chooses Cat Form / Travel Form / Dragonriding depending on circumstances:
 
-```
+```LUA
 #showtooltip
 /cancelaura Bear Form
 /cancelaura Cat Form
