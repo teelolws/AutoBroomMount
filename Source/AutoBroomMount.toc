@@ -1,0 +1,7 @@
+## Interface: 100107
+## Title: Auto Broom Mount
+## Version: @project-version@
+## Author: Teelo
+## IconTexture: Interface\Icons\inv_broommount2_red
+
+AutoBroomMount.lua
