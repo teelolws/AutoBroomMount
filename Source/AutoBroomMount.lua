@@ -4,8 +4,13 @@ local function update()
     local spellName = GetSpellInfo(368896)
     local dragonridingUsable = IsUsableSpell(spellName)
     
-    spellName = GetSpellInfo(419345)
-    local broomUsable = IsUsableSpell(spellName)
+    local broomUsable = false
+    for i = 1, GetNumRandomDungeons() do
+        if GetLFGRandomDungeonInfo(i) == 285 then
+            broomUsable = true
+        end
+    end
+    
     local source, replacement = "C_MountJournal%.SummonByID%(0%)", "C_MountJournal.SummonByID(1799)"
     
     if dragonridingUsable or (not broomUsable) then
