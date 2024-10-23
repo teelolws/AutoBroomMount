@@ -8,8 +8,8 @@ end
 local function update()
     if InCombatLockdown() then return end
     
-    local spellName = GetSpellInfo(368896)
-    local dragonridingUsable = IsUsableSpell(spellName)
+    local spellName = C_Spell.GetSpellInfo(368896).name
+    local dragonridingUsable = C_Spell.IsSpellUsable(spellName)
     
     local holidayActive = false
     for i = 1, GetNumRandomDungeons() do
@@ -19,8 +19,8 @@ local function update()
     end
     
     local broomUsable = false
-    spellName = GetSpellInfo(419345)
-    broomUsable = IsUsableSpell(spellName)
+    spellName = C_Spell.GetSpellInfo(419345).name
+    broomUsable = C_Spell.IsSpellUsable(spellName)
     
     local source, replacement = "C_MountJournal%.SummonByID%(0%)", "C_MountJournal.SummonByID(1799)"
     
@@ -73,3 +73,4 @@ end
 
 EventUtil.RegisterOnceFrameEventAndCallback("PLAYER_ENTERING_WORLD", update)
 EventRegistry:RegisterFrameEventAndCallback("MOUNT_JOURNAL_USABILITY_CHANGED", update)
+EventRegistry:RegisterFrameEventAndCallback("PLAYER_REGEN_ENABLED", update)
