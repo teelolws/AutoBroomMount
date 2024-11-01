@@ -5,11 +5,15 @@ local function unmute()
     UnmuteSoundFile(567524)
 end
 
+local function mute()
+    MuteSoundFile(567489)
+    MuteSoundFile(567524)
+end
+
 local function update()
     if InCombatLockdown() then return end
     
     local spellName = C_Spell.GetSpellInfo(368896).name
-    local dragonridingUsable = C_Spell.IsSpellUsable(spellName)
     
     local holidayActive = false
     for i = 1, GetNumRandomDungeons() do
@@ -22,32 +26,17 @@ local function update()
     spellName = C_Spell.GetSpellInfo(419345).name
     broomUsable = C_Spell.IsSpellUsable(spellName)
     
-    local source, replacement = "C_MountJournal%.SummonByID%(0%)", "C_MountJournal.SummonByID(1799)"
-    
-    if dragonridingUsable or (not holidayActive) or (not broomUsable) then
-        source, replacement = "C_MountJournal%.SummonByID%(1799%)", "C_MountJournal.SummonByID(0)"
-    end
-    
-    for macroIndex = 1, 138 do
-        local name, icon, body = GetMacroInfo(macroIndex)
-        if name and body and body:find(source) then
-            body = body:gsub(source, replacement)
-            EditMacro(macroIndex, name, icon, body)
-        end
-    end
-    
     if GetCursorInfo() then return end
     
-    if dragonridingUsable or (not holidayActive) or (not broomUsable) then
+    if holidayActive and broomUsable then
         for slotID = 1, 120 do
             if GetActionTexture(slotID) then
                 local actionType, actionID, subType = GetActionInfo(slotID)
-                if ((actionType == "summonmount") and (actionID == 1799)) or ((actionType == "companion") and (actionID == 419345) and (subType == "MOUNT")) then
-                    MuteSoundFile(567489)
-                    MuteSoundFile(567524)
+                if (actionType == "summonmount") and (actionID == 268435455) then
+                    mute()
                     PickupAction(slotID)
                     ClearCursor()
-                    C_MountJournal.Pickup(0)
+                    C_Spell.PickupSpell(419345)
                     PlaceAction(slotID)
                     RunNextFrame(unmute)
                 end
@@ -57,12 +46,11 @@ local function update()
         for slotID = 1, 120 do
             if GetActionTexture(slotID) then
                 local actionType, actionID, subType = GetActionInfo(slotID)
-                if (actionType == "summonmount") and (actionID == 268435455) then
-                    MuteSoundFile(567489)
-                    MuteSoundFile(567524)
+                if ((actionType == "summonmount") and (actionID == 1799)) or ((actionType == "companion") and (actionID == 419345) and (subType == "MOUNT")) then
+                    mute()
                     PickupAction(slotID)
                     ClearCursor()
-                    PickupSpell(419345)
+                    C_MountJournal.Pickup(0)
                     PlaceAction(slotID)
                     RunNextFrame(unmute)
                 end
