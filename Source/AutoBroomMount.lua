@@ -26,6 +26,20 @@ local function update()
     spellName = C_Spell.GetSpellInfo(419345).name
     broomUsable = C_Spell.IsSpellUsable(spellName)
     
+    local source, replacement = "C_MountJournal%.SummonByID%(1799%)", "C_MountJournal.SummonByID(0)"
+    
+    if holidayActive and broomUsable then
+        source, replacement = "C_MountJournal%.SummonByID%(0%)", "C_MountJournal.SummonByID(1799)"
+    end
+    
+    for macroIndex = 1, 138 do
+        local name, icon, body = GetMacroInfo(macroIndex)
+        if name and body and body:find(source) then
+            body = body:gsub(source, replacement)
+            EditMacro(macroIndex, name, icon, body)
+        end
+    end
+    
     if GetCursorInfo() then return end
     
     if holidayActive and broomUsable then
